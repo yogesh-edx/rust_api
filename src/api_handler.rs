@@ -33,7 +33,7 @@ pub async fn get_user(Path(id): Path<u32>, State(users): State<UserList>) -> imp
     }
 }
 
-pub(super) async fn insert_user_data(State(users): State<UserList>, Json(new_user): Json<User>)-> impl IntoResponse {
+pub async fn insert_user_data(State(users): State<UserList>, Json(new_user): Json<User>)-> impl IntoResponse {
     // let user_vect
     let mut users = users.lock().unwrap();
     users.push(new_user.clone());
@@ -76,6 +76,6 @@ pub async fn delete_user(Path(id): Path<u32>, State(users): State<UserList>) -> 
 }
 
 //Testing api...
-pub(super) async fn hello() -> &'static str{
+pub async fn hello() -> &'static str{
     "My first API"
 }
